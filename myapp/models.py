@@ -20,13 +20,14 @@ class LostAndFound(models.Model):
     item_received = models.BooleanField(default=False)
 
 
-class Cleaning(models.Model):
+class Complaint(models.Model):
     location = models.CharField(blank=False, null=False, max_length=1000)
     info = models.CharField(blank=False, null=False, max_length=1000)
     status = models.IntegerField(blank=False, null=False, default=0)
-    submit_user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="user_clean")
-    photo = models.ImageField(upload_to="cleaning_images/")
+    submit_user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="user_complaints")
+    photo = models.ImageField(upload_to="complaint_images/", null=True)
     requested_date = models.DateTimeField(auto_now=True, null=False, blank=False)
+    category = models.CharField(blank=False, null=False, max_length=1000)
 
 
 class Order(models.Model):
@@ -46,3 +47,4 @@ class Menu(models.Model):
 class Order_items(models.Model):
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="item_orderid")
     item_id = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name="order_items")
+    quantity = models.IntegerField(blank=False, null=False)

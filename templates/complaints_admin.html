@@ -19,12 +19,12 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-        <div class="container"><a class="navbar-brand" href="#">UniManager</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand" href="/">UniManager</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome Test</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Logout</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome {{ name }}</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -32,7 +32,7 @@
     <div style="margin-top: 1em;min-height: 50vh;">
         <div class="container">
             <div class="d-lg-flex" style="display: flex;justify-content: space-between;margin-bottom: 5px;">
-                <h2 class="text-left">Cleaning Requests</h2>
+                <h2 class="text-left">Complaints/Requests</h2>
                 <div class="btn-group" role="group" style="max-height: 35px;"><button class="btn btn-primary" type="button" style="margin-right: 1em;">All</button><button class="btn btn-primary" type="button">Pending</button></div>
             </div>
             <div class="table-responsive">

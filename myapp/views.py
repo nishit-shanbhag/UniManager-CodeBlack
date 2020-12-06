@@ -1,6 +1,7 @@
 import django
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
 from django.http import Http404
 from django.shortcuts import render, redirect
 
@@ -11,14 +12,15 @@ from .models import *
 
 
 def home(request):
-    return render(request, "home.html", {})
+    return render(request, "home.html",
+                  {"user_type": request.session.get("user_type"), "name": request.session['name'].split()[0]})
 
 
 def auth(request):
     if request.user.is_authenticated:
         return redirect("/home")
 
-    return render(request, "userAuth.html", {})
+    return render(request, "userAuth.html")
 
 
 def register(request):
@@ -53,7 +55,9 @@ def login(request):
             django.contrib.auth.login(request, user)
             print("LOGGED IN", email)
             request.session['email'] = email
-            # return render(request, "home.html", {})
+            request.session['name'] = user.first_name
+            user_type = Profile.objects.filter(user=request.user).first().type
+            request.session["user_type"] = user_type
             return redirect("/home")
 
         else:
@@ -65,6 +69,52 @@ def signout(request):
     logout(request)
     request.session.flush()
     return redirect("/")
+
+
+def canteen_admin(request):
+    return render(request, "canteen_admin.html", {"name": request.session['name'].split()[0]})
+
+
+def canteen_user(request):
+    orders = list(Order.objects.filter(submit_user=request.user).order_by("-delivery_date").values())
+
+    for order in range(len(orders)):
+        itemob = list(Order_items.objects.filter(order_id=orders[order]["id"]).values())
+        orders[order]["delivery_date"] = orders[order]["delivery_date"].strftime('%H:%M:%S %d/%m/%Y')
+        food_items = []
+        for item in itemob:
+            menu_item = Menu.objects.filter(id=item["item_id_id"]).first()
+
+            food_items.append([str(item["quantity"]) + " x " + menu_item.name])
+
+        orders[order]["items"] = food_items
+    print(orders)
+    return render(request, "canteen_user.html", {"name": request.session['name'].split()[0], "orders": orders})
+
+
+def complaints_admin(request):
+    return render(request, "complaints_admin.html", {"name": request.session['name'].split()[0]})
+
+
+def complaints_user(request):
+    if request.method == "POST":
+        print(request.POST)
+        if request.FILES.get('myimage', False):
+            myfile = request.FILES["myimage"]
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)
+
+            Complaint.objects.create(location=request.POST.get("location"), info=request.POST.get("message"),
+                                     photo=uploaded_file_url, submit_user=request.user,
+                                     category=request.POST.get("category"))
+        else:
+            Complaint.objects.create(location=request.POST.get("location"), info=request.POST.get("message"),
+                                     submit_user=request.user, category=request.POST.get("category"))
+
+        return render(request, "complaints_user.html", {"name": request.session['name'].split()[0]})
+    else:
+        return render(request, "complaints_user.html", {"name": request.session['name'].split()[0]})
 
 
 # Send request.user

@@ -1,10 +1,110 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>UniManager</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Contact-Form-Clean-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Different-Styled---Cards-1-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Different-Styled---Cards-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Footer-Basic-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Navigation-Clean-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Newsletter-Subscription-Form-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/styles-n.css' %}">
+</head>
+
+<body>
+<div>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
+        <div class="container"><a class="navbar-brand" href="/">UniManager</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                    class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                 id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome {{ name }}</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="contact-clean">
+    <form method="post">
+        {% csrf_token %}
+        {% if user_type == 0 %}
+
+
+            <h2 class="text-center">Services</h2>
+            <div class="form-group d-flex">
+                <button class="btn btn-primary btn-block d-xl-flex justify-content-xl-center" type="button"
+                        style="margin-right: 7vw;margin-left: 7vw;background-color: rgb(88,16,145);color: rgb(255,255,255);"
+                        onclick="window.location='/home/lost-and-found'">Lost &amp; Found
+                </button>
+            </div>
+            <div class="form-group d-flex">
+                <button class="btn btn-primary btn-block d-xl-flex justify-content-xl-center" type="button"
+                        style="margin-right: 7vw;margin-left: 7vw;" onclick="window.location='/home/complaints'">Complaints
+                </button>
+            </div>
+            <div class="form-group d-flex">
+                <button class="btn btn-primary btn-block d-xl-flex justify-content-xl-center" type="button"
+                        style="margin-right: 7vw;margin-left: 7vw;" onclick="window.location='/home/canteen'">Canteen
+                </button>
+            </div>
+
+
+        {% elif user_type == 1 %}
+            <h2 class="text-center">Lost &amp; Found Admin</h2>
+            <div class="form-group d-flex">
+                <button class="btn btn-primary btn-block d-xl-flex justify-content-xl-center" type="button"
+                        style="margin-right: 7vw;margin-left: 7vw;background-color: rgb(88,16,145);color: rgb(255,255,255);"
+                        onclick="window.location='/home/lost-and-found-admin'">Lost &amp; Found
+                </button>
+            </div>
+
+        {% elif user_type == 2 %}
+            <h2 class="text-center">Cleaning Admin</h2>
+            <div class="form-group d-flex">
+                <button class="btn btn-primary btn-block d-xl-flex justify-content-xl-center" type="button"
+                        style="margin-right: 7vw;margin-left: 7vw;background-color: rgb(88,16,145);color: rgb(255,255,255);"
+                        onclick="window.location='/home/complaints-admin'">Complaints
+                </button>
+            </div>
+        {% elif user_type == 3 %}
+            <h2 class="text-center">Canteen Admin</h2>
+            <div class="form-group d-flex">
+                <button class="btn btn-primary btn-block d-xl-flex justify-content-xl-center" type="button"
+                        style="margin-right: 7vw;margin-left: 7vw;background-color: rgb(88,16,145);color: rgb(255,255,255);"
+                        onclick="window.location='/home/canteen-admin'">Canteen
+                </button>
+            </div>
+        {% endif %}
+
+    </form>
+</div>
+<section></section>
+<div class="footer-basic">
+    <footer>
+        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+                class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a
+                href="#"><i class="icon ion-social-facebook"></i></a></div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">Company Name © 2017</p>
+    </footer>
+</div>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
 </body>
+
 </html>

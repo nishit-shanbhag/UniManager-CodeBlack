@@ -31,54 +31,38 @@
         </div>
     </div>
 </nav>
-<div style="margin-top: 1em;">
-    <div class="container">
-        <div style="display: flex;justify-content: space-between;margin-bottom: 5px;">
-            <h2 class="text-left">My Orders</h2>
-            <button class="btn btn-primary" type="submit" style="text-transform: uppercase">New Order</button>
+<div class="contact-clean">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="text-center">New Request/Complaint</h2>
+        <div class="form-group"><input class="form-control" type="text" name="location" required=""
+                                       placeholder="Location"></div>
+        <div class="form-group"><textarea class="form-control" rows="14" name="message" required=""
+                                          placeholder="Information"></textarea></div>
+        <div class="form-group">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
+                        type="button" style="margin-top: -5px;" id="category">Select Category
+                </button>
+                <div class="dropdown-menu" role="menu">
+                    <a class="dropdown-item" role="presentation" href="#"
+                       onclick="category_change('Cleaning')">Cleaning</a>
+                    <a class="dropdown-item" role="presentation" href="#" onclick="category_change('Admission')">Admission</a>
+                    <a class="dropdown-item" role="presentation" href="#" onclick="category_change('Examination')">Examination</a>
+                    <a class="dropdown-item" role="presentation" href="#" onclick="category_change('Infrastructure')">
+                        Infrastructure</a>
+                    <a class="dropdown-item" role="presentation" href="#" onclick="category_change('Others')">Others</a>
+                </div>
+            </div>
+            <input type="text" id="category_inp" hidden name="category">
         </div>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Order</th>
-                    <th>Total Amount</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                {% for order in orders %}
-                    <tr>
-                        <td>{{ order.id }}</td>
-
-
-                        <td>
-                            {% for item in order.items %}
-                                <p>{{ item.0 }}</p>
-
-                            {% endfor %}
-                        </td>
-                        <td>{{ order.total_cost }}</td>
-                        <td>{{ order.delivery_date }}</td>
-                        <td> {% if order.status == 0 %}
-                            Pending
-                        {% elif order.status == 1 %}
-                            Completed
-                        {% elif order.status == 2 %}
-                            Cancelled
-                        {% endif %}  </td>
-                    </tr>
-                {% endfor %}
-
-                </tbody>
-            </table>
+        <div class="form-group"><input name="myimage" type="file"></div>
+        <div class="form-group"><small class="form-text text-danger">{{ error }}</small></div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Submit</button>
         </div>
-    </div>
+    </form>
 </div>
-<div style="min-height: 50vh;margin-top: 1em;"></div>
 <div class="footer-basic">
     <footer>
         <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
@@ -96,6 +80,17 @@
 </div>
 <script src="{% static 'assets/js/jquery.min.js' %}"></script>
 <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script>
+
+    function category_change(category) {
+
+        $("#category").html(category);
+        $("#category_inp").val(category);
+    }
+
+</script>
 </body>
+
 
 </html>

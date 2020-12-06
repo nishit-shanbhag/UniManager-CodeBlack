@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.conf import settings
+from django.conf.urls.static import static
 from myapp.views import *
 
 urlpatterns = [
@@ -24,7 +25,18 @@ urlpatterns = [
     path('register', register, name="register"),
     path('login', login, name="login"),
     path('logout', signout, name='logout'),
-    path("home/", home, name="home"),
+    path('home/', home, name='home'),
+
+    # path("home/lost-and-found", lost_and_found, name="lost-and-found"),
+    path("home/complaints", complaints_user, name="complaints"),
+    path("home/canteen", canteen_user, name="canteen"),
+    # path("home/lost-and-found-admin", home, name="lost-and-found-admin"),
+    path("home/complaints-admin", complaints_admin, name="complaints-admin"),
+    path("home/canteen-admin", canteen_admin, name="canteen-admin"),
+
     # path("temp/", get_lost_and_found_complains, name="temp"),
     # path("temp/<int:id>", get_lost_and_found_by_id, name="temp")
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
