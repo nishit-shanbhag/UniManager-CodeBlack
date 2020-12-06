@@ -124,7 +124,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     '/static/css',
     '/static/js',
-    # '/static/bootstrap',
+    '/static/assets',
     # '/static/img',
     # '/static/fonts',
 ]
