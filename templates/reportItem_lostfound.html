@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Hackathon</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Bootstrap-Cards-v2-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Contact-Form-Clean-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Footer-Basic-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Clean-1-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Clean-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Navigation-Clean-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/styles-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search-1-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search-shri.css'%}">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
+        <div class="container"><a class="navbar-brand" href="#">UniManager</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome Test</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="contact-clean">
+        <form method="post">
+            <h2 class="text-center">Report Item</h2>
+            <div class="form-group"><input class="form-control" type="text" name="name" placeholder="Name e.g. watch, wallet" required=""></div>
+            <div class="form-group"><textarea class="form-control" name="description" placeholder="Description of Item" rows="14" required=""></textarea></div>
+            <div class="form-group"><button class="btn btn-secondary" type="submit" style="background-color: rgb(88,16,145);">Submit&nbsp;</button></div>
+        </form>
+    </div>
+    <div class="footer-basic">
+        <footer>
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Company Name © 2017</p>
+        </footer>
+    </div>
+    <script src="{% static 'assets/js/jquery.min.js'%}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'assets/js/Table-With-Search.js'%}"></script>
+</body>
+
+</html>

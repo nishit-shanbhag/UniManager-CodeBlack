@@ -1,0 +1,52 @@
+.bootstrap_cards2 {
+  min-height: 114vh;
+  background: #fafafa;
+  padding-left: 5px;
+  margin-left: 5px;
+}
+
+.social-link {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  border-radius: 50%;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.social-link:hover, .social-link:focus {
+  background: #ddd;
+  text-decoration: none;
+  color: #555;
+}
+
+.progress {
+  height: 10px;
+}
+
+#product_quantity {
+  display: flex;
+}
+
+._3dY_ZR {
+  display: flex;
+}
+
+._253qQJ {
+  width: 25px;
+  text-align: center;
+}
+
+.row.pb-5.mb-4 {
+  margin-top: 30px;
+}
+
+.col-lg-3.col-md-6.mb-4.mb-lg-0 {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
