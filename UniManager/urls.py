@@ -24,5 +24,7 @@ urlpatterns = [
     path('register', register, name="register"),
     path('login', login, name="login"),
     path('logout', signout, name='logout'),
-    path("home/", home, name = "home"),
+    path("home/", home, name="home"),
+    # path("temp/", get_lost_and_found_complains, name="temp"),
+    # path("temp/<int:id>", get_lost_and_found_by_id, name="temp")
 ]

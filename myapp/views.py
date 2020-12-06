@@ -3,7 +3,9 @@ from django.contrib.auth import authenticate, logout
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.shortcuts import render, redirect
+
 from .models import *
+
 
 # Create your views here.
 
@@ -32,7 +34,7 @@ def register(request):
         if User.objects.filter(username=college_id).count() > 0:
             return render(request, "userAuth.html", {"error": "Username already exists"})
         user = User.objects.create_user(first_name=name, username=email, password=password)
-        profile = Profile.objects.create(user = user, college_id = college_id)
+        profile = Profile.objects.create(user=user, college_id=college_id)
         request.session['email'] = email
         request.session['name'] = name
         django.contrib.auth.login(request, user)
@@ -62,4 +64,42 @@ def login(request):
 def signout(request):
     logout(request)
     request.session.flush()
-    return render(request, "home.html", {})
+    return redirect("/")
+
+
+# Send request.user
+def add_lost_and_found_complain(user_ob, item_name, info):
+    lost_and_found_ob = LostAndFound.objects.create(submit_user=user_ob, name=item_name, information=info)
+
+
+def get_lost_and_found_complains(request):
+    lost_and_found_obs = LostAndFound.objects.order_by("-submit_date").all()
+    print(list(lost_and_found_obs.values()))
+    return list(lost_and_found_obs.values())
+
+
+def get_lost_and_found_by_id(request, id: int):
+    lost_and_found_ob = LostAndFound.objects.filter(id=id)
+    return list(lost_and_found_ob.values())
+
+
+def change_lnf_status(id, status):
+    LostAndFound.objects.filter(id=id).update(status=status)
+
+
+def place_order(request):
+    order_ob = Order.objects.create(submit_user=request.user, delivery_date=request.POST.get("delivery_date"))
+
+    items = []
+    for i in range(1, 10):
+        item = int(request.POST.get(str(i)))
+        if int(item) > 0:
+            items.append([i, item])
+            Order_items.objects.create(order_ob, Menu.objects.filter(id=i))
+
+    total_cost = 0
+    items_ob = Menu.objects.all().values()
+    for item in items:
+        total_cost += items_ob[item[0] + 1]["price"] * item[1]
+
+    order_ob.update(total_cost=total_cost)
