@@ -26,6 +26,7 @@ class Cleaning(models.Model):
     status = models.IntegerField(blank=False, null=False, default=0)
     submit_user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="user_clean")
     photo = models.ImageField(upload_to="cleaning_images/")
+    requested_date = models.DateTimeField(auto_now=True, null=False, blank=False)
 
 
 class Order(models.Model):
