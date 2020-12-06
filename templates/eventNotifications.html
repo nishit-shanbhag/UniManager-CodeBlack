@@ -1,0 +1,87 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Hackathon</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Bootstrap-Cards-v2-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Contact-Form-Clean-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Footer-Basic-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Clean-1-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Clean-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Dark.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Navigation-Clean-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/styles-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search-1-shri.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search-shri.css'%}">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
+        <div class="container"><a class="navbar-brand" href="#">UniManager</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome Test</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="col-auto col-md-12 text-center mx-auto search-table-col" style="margin-top: 49px;margin-left: 0;max-width: 90%;display: block;position: relative;align-items: center;">
+        <div class="form-group pull-right col-lg-4"><input class="form-control-sm search form-control" type="text" placeholder="Search by typing here.." style="width: 315px;"></div><span class="counter pull-right"></span>
+        <div class="table-responsive table-bordered table table-hover table-bordered results"
+            style="margin-top: 0;">
+            <table class="table table-bordered table-hover">
+                <thead class="bill-header cs">
+                    <tr>
+                        <th class="text-uppercase col-lg-1" id="trs-hd">Event</th>
+                        <th class="text-uppercase col-lg-1" id="trs-hd">Description</th>
+                        <th class="text-uppercase col-lg-2" id="trs-hd">Organizing Committee</th>
+                        <th class="text-uppercase col-lg-3" id="trs-hd">Location</th>
+                        <th class="text-uppercase col-lg-3" id="trs-hd">Date</th>
+                        <th class="text-uppercase col-lg-3" id="trs-hd">duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="warning no-result">
+                        <td colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
+                    </tr>
+                    <tr>
+                        <td style="max-width: 24px;width: 422px;">Nikhil Suwala</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer-basic">
+        <footer>
+            <div class="align-self-end social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Company Name © 2017</p>
+        </footer>
+    </div>
+    <script src="{% static 'assets/js/jquery.min.js'%}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'assets/js/Table-With-Search.js'%}"></script>
+</body>
+
+</html>
