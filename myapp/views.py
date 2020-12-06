@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import django
 from dateutil import tz
@@ -94,6 +94,44 @@ def canteen_admin(request):
     return render(request, "canteen_admin.html", {"name": request.session['name'].split()[0], "orders": orders})
 
 
+def canteen_admin_statistics(request):
+    current_date = datetime.now()
+    date = current_date - timedelta(days=30)
+
+    arr = [['Day', 'Sales']]
+    for i in range(1, 31):
+        days_total = 0
+        orders = Order.objects.filter(delivery_date__date=date)
+        for order in orders:
+            days_total += order.total_cost
+        arr.append([i, days_total])
+        date = date+timedelta(days=1)
+
+
+    items_sold = [["Food Item", "Quantity"],[1, 0],[1, 0],[1, 0],[1, 0],[1, 0],[1, 0],[1, 0],[1, 0]]
+
+    for i in range(1,9):
+        name = Menu.objects.filter(id = i).first().name
+        items_sold[i][0] = name
+
+    date = current_date - timedelta(days=30)
+
+    for i in range(1, 31):
+        orders = Order.objects.filter(delivery_date__date=date)
+        for order in orders:
+            items = Order_items.objects.filter(order_id = order)
+            print(items)
+            for item in items:
+                items_sold[item.item_id.id][1]+=item.quantity
+        date = date+timedelta(days=1)
+
+
+    print(items_sold)
+
+
+    return render(request, "canteen_admin_stats.html", {"data_30": arr, "pie_30":items_sold})
+
+
 def canteen_user(request):
     orders = list(Order.objects.filter(submit_user=request.user).order_by("-delivery_date").values())
 
@@ -184,7 +222,8 @@ def lost_and_found_admin_info(request, id):
             LostAndFound.objects.filter(id=id).update(name=name, information=description, submit_date=delivery_date,
                                                       submit_user=User.objects.filter(username=upload_email).first(),
                                                       takeaway_user=User.objects.filter(
-                                                          username=takeaway_email).first(), takeaway_date=datetime.now(),
+                                                          username=takeaway_email).first(),
+                                                      takeaway_date=datetime.now(),
                                                       status=1)
         else:
             LostAndFound.objects.filter(id=id).update(name=name, information=description, submit_date=delivery_date,
@@ -208,6 +247,32 @@ def lost_and_found_admin_info(request, id):
                       {"name": request.session['name'].split()[0], "l_and_f": l_and_f})
 
 
+def event_user(request):
+    events = list(Event.objects.filter(event_date__gte=datetime.now()).order_by('-event_date').values())
+    for i in range(len(events)):
+        events[i]["event_date"] = events[i]["event_date"].strftime('%H:%M:%S %d/%m/%Y')
+    return render(request, "eventNotifications_user.html",
+                  {"name": request.session['name'].split()[0], "events": events})
+
+
+def event_admin(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        org_com = request.POST.get("org_com")
+        loc = request.POST.get("loc")
+        link = request.POST.get("link")
+        desc_event = request.POST.get("desc_event")
+
+        event_date = datetime.strptime(request.POST.get("event_date"),
+                                       "%Y-%m-%dT%H:%M")
+        duration = request.POST.get("duration")
+        print(event_date)
+        Event.objects.create(event_name=name, event_desc=desc_event, organizing_committee=org_com, location=loc,
+                             link=link, event_date=event_date, duration=duration)
+        return redirect("/home/events")
+    return render(request, "eventNotificaiton_admin.html", {"name": request.session['name'].split()[0]})
+
+
 # Send request.user
 def add_lost_and_found_complain(user_ob, item_name, info):
     lost_and_found_ob = LostAndFound.objects.create(submit_user=user_ob, name=item_name, information=info)
@@ -227,36 +292,26 @@ def change_lnf_status(id, status):
     LostAndFound.objects.filter(id=id).update(status=status)
 
 
-def place_order(request):
-    order_ob = Order.objects.create(submit_user=request.user, delivery_date=request.POST.get("delivery_date"))
-
-    items = []
-    for i in range(1, 9):
-        item = int(request.POST.get(str(i)))
-        if int(item) > 0:
-            items.append([i, item])
-            Order_items.objects.create(order_ob, Menu.objects.filter(id=i))
-
-    total_cost = 0
-    items_ob = Menu.objects.all().values()
-    for item in items:
-        total_cost += items_ob[item[0] + 1]["price"] * item[1]
-
-    order_ob.update(total_cost=total_cost)
-
-
 def canteen_user_order(request):
     if request.POST:
-        order_ob = Order.objects.create(submit_user=request.user,
-                                        delivery_date=datetime.strptime(request.POST.get("delivery_date"),
-                                                                        "%Y-%m-%dT%H:%M:%S"))
-
+        if request.POST.get("delivery_date").count(":") == 2:
+            order_ob = Order.objects.create(submit_user=request.user,
+                                            delivery_date=datetime.strptime(request.POST.get("delivery_date"),
+                                                                            "%Y-%m-%dT%H:%M:%S"))
+        else:
+            order_ob = Order.objects.create(submit_user=request.user,
+                                            delivery_date=datetime.strptime(request.POST.get("delivery_date"),
+                                                                            "%Y-%m-%dT%H:%M"))
         items = []
+        print(request.POST)
         for i in range(1, 9):
-            item = int(request.POST.get(str(i)))
-            if int(item) > 0:
-                items.append([i, item])
-                Order_items.objects.create(order_id=order_ob, item_id=Menu.objects.filter(id=i).first(), quantity=item)
+
+            if request.POST.get(str(i)):
+                item = int(request.POST.get(str(i)))
+                if int(item) > 0:
+                    items.append([i, item])
+                    Order_items.objects.create(order_id=order_ob, item_id=Menu.objects.filter(id=i).first(),
+                                               quantity=item)
 
         total_cost = 0
         items_ob = Menu.objects.all().values()

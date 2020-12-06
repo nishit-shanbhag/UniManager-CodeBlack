@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>UniManager</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Contact-Form-Clean-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Different-Styled---Cards-1-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Different-Styled---Cards-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Footer-Basic-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Navigation-Clean-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Newsletter-Subscription-Form-n.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/styles-n.css' %}">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+    </script>
+</head>
+
+<body>
+<nav class="navbar navbar-light navbar-expand-md navigation-clean">
+    <div class="container"><a class="navbar-brand" href="/">UniManager</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse"
+             id="navcol-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome {{ name }}</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div style="margin-top: 1em;">
+    <div class="container">
+        <div class="d-lg-flex" style="display: flex;justify-content: space-between;margin-bottom: 5px;">
+            <h2 class="text-left">Reports</h2>
+        </div>
+        <h3 class="text-left">Sales in Last 30 Days</h3>
+        <div id="curve_chart" style="width: 900px; height: 500px"></div>
+        <h3 class="text-left">Food Popularity in Last 30 Days</h3>
+        <div id="piechart" style="width: 900px; height: 500px;"></div>
+    </div>
+</div>
+<div style="min-height: 50vh;margin-top: 1em;"></div>
+<div class="footer-basic">
+    <footer>
+        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+                class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a
+                href="#"><i class="icon ion-social-facebook"></i></a></div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">Company Name © 2017</p>
+    </footer>
+</div>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+
+
+<script>
+
+
+    cookies = document.cookie.split(';').reduce((cookies, cookie) => {
+        const [name, value] = cookie.split('=').map(c => c.trim());
+        cookies[name] = value;
+        return cookies;
+    }, {});
+
+    function status_change(category, id) {
+
+        $("#" + id).html(category);
+
+        if (category === "Completed" || category === "Cancelled") {
+            $.ajax({
+                type: "POST",
+                url: "/canteen_admin_status_change",
+                dataType: "json",
+                data: {
+                    "category": category,
+                    "id": id
+                },
+                headers: {"X-CSRFToken": cookies["csrftoken"]},
+                success:
+                    function (data) {
+                        location.reload();
+                    }
+            });
+        }
+    }
+
+
+</script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages': ['corechart']});
+
+    google.charts.setOnLoadCallback(drawChart_30);
+    google.charts.setOnLoadCallback(drawPie_30);
+
+    function drawChart_30() {
+
+        var arr = "{{ data_30 }}"
+        arr = arr.replaceAll("&#x27;", "\"")
+        arr = JSON.parse(arr);
+        var data = google.visualization.arrayToDataTable(arr);
+
+        var options = {
+            title: 'Canteen Last 30 Days Sales',
+            curveType: 'function',
+            legend: {position: 'bottom'}
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+    }
+
+    function drawPie_30() {
+        var arr = "{{ pie_30 }}"
+        arr = arr.replaceAll("&#x27;", "\"")
+        arr = JSON.parse(arr);
+        var data = google.visualization.arrayToDataTable(arr);
+
+        var options = {
+          title: 'Food Item Popularity in last 30 days'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+</script>
+
+</body>
+
+</html>

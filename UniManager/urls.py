@@ -34,6 +34,7 @@ urlpatterns = [
     # path("home/lost-and-found-admin", home, name="lost-and-found-admin"),
     path("home/complaints-admin", complaints_admin, name="complaints-admin"),
     path("home/canteen-admin", canteen_admin, name="canteen-admin"),
+    path("home/canteen-admin-stats", canteen_admin_statistics, name="canteen-admin-stats"),
     path("canteen_admin_status_change", canteen_admin_status_change, name="canteen_admin_status_change"),
     path("complaint_admin_status_change", complaint_admin_status_change, name="complaint_admin_status_change"),
 

@@ -43,7 +43,7 @@
                                         <div class="_26HdzL">
                                             <input type="text" value="0" id="{{ menu_item.id }}"
                                                    name="{{ menu_item.id }}"
-                                                   class="_253qQJ">
+                                                   class="_253qQJ" style="" readonly>
                                         </div>
                                         <button type="button" class="_23FHuj"
                                                 onclick="increment({{ menu_item.id }}, {{ menu_item.price }})"> +
@@ -124,6 +124,7 @@
         today.setMinutes(today.getMinutes() + 30);
         today.setSeconds(0);
         $("#delivery_date").val(today.toJSON().slice(0, 19));
+
     });
 
 

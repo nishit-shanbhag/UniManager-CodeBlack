@@ -48,3 +48,16 @@ class Order_items(models.Model):
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="item_orderid")
     item_id = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name="order_items")
     quantity = models.IntegerField(blank=False, null=False)
+
+
+class Event(models.Model):
+    event_name = models.CharField(blank=False, null=False, max_length=100)
+    event_desc = models.CharField(blank=False, null=False, max_length=1000)
+    organizing_committee = models.CharField(blank=True, null=True, max_length=100)
+    location = models.CharField(blank=False, null=False, max_length=100)
+    link = models.CharField(blank=True, null=True, max_length=1000)
+    event_date = models.DateTimeField(null=False, blank=False)
+    duration = models.CharField(blank=False, null=False, max_length=100)
+
+
+
