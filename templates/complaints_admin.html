@@ -18,70 +18,128 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-        <div class="container"><a class="navbar-brand" href="/">UniManager</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse"
-                id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome {{ name }}</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div style="margin-top: 1em;min-height: 50vh;">
-        <div class="container">
-            <div class="d-lg-flex" style="display: flex;justify-content: space-between;margin-bottom: 5px;">
-                <h2 class="text-left">Complaints/Requests</h2>
-                <div class="btn-group" role="group" style="max-height: 35px;"><button class="btn btn-primary" type="button" style="margin-right: 1em;">All</button><button class="btn btn-primary" type="button">Pending</button></div>
-            </div>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Image</th>
-                            <th>Requested by</th>
-                            <th>Date</th>
-                            <th>Information</th>
-                            <th>Location</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><img></td>
-                            <td>Nishit Shanbhag</td>
-                            <td>Today</td>
-                            <td>wadwadawd</td>
-                            <td>awdawdawd</td>
-                            <td>
-                                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" style="margin-top: -5px;">Dropdown </button>
-                                    <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second Item</a><a class="dropdown-item" role="presentation" href="#">Third Item</a></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="footer-basic">
-        <footer>
-            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Services</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+<nav class="navbar navbar-light navbar-expand-md navigation-clean">
+    <div class="container"><a class="navbar-brand" href="/">UniManager</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse"
+             id="navcol-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome {{ name }}</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Logout</a></li>
             </ul>
-            <p class="copyright">Company Name © 2017</p>
-        </footer>
+        </div>
     </div>
-    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+</nav>
+<div style="margin-top: 1em;min-height: 50vh;">
+    <div class="container">
+        <div class="d-lg-flex" style="display: flex;justify-content: space-between;margin-bottom: 5px;">
+            <h2 class="text-left">Complaints/Requests</h2>
+            <div class="btn-group" role="group" style="max-height: 35px;">
+                <button class="btn btn-primary" type="button" style="margin-right: 1em;">All</button>
+                <button class="btn btn-primary" type="button">Pending</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Requested by</th>
+                    <th>Date</th>
+                    <th>Information</th>
+                    <th>Location</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for complaint in complaints %}
+                    <tr>
+                        <td>{{ complaint.id }}</td>
+                        <td><a href="{{ complaint.photo }}"> <img src="{{ complaint.photo }} " style="max-height: 50px"></a>
+                        </td>
+                        <td>{{ complaint.submit_user_id }}</td>
+                        <td>{{ complaint.requested_date }}</td>
+                        <td>{{ complaint.info }}</td>
+                        <td>{{ complaint.location }}</td>
+                        <td>{{ complaint.category }}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                        aria-expanded="false" type="button" style="margin-top: -5px;">Pending
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a class="dropdown-item" role="presentation" href="#" onclick="status_change('Pending', {{ complaint.id }})">Pending</a>
+                                    <a class="dropdown-item" role="presentation" href="#" onclick="status_change('Resolved', {{ complaint.id }})">Resolved</a>
+                                    <a class="dropdown-item" role="presentation" href="#" onclick="status_change('Rejected', {{ complaint.id }})">Rejected</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="footer-basic">
+    <footer>
+        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+                class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a
+                href="#"><i class="icon ion-social-facebook"></i></a></div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">Company Name © 2017</p>
+    </footer>
+</div>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+
+
+<script>
+
+
+    cookies = document.cookie.split(';').reduce((cookies, cookie) => {
+        const [name, value] = cookie.split('=').map(c => c.trim());
+        cookies[name] = value;
+        return cookies;
+    }, {});
+
+    function status_change(complaint, id) {
+
+        $("#" + id).html(complaint);
+
+        if (complaint === "Resolved" || complaint === "Rejected") {
+            $.ajax({
+                type: "POST",
+                url: "/complaint_admin_status_change",
+                dataType: "json",
+                data: {
+                    "status": complaint,
+                    "id": id
+                },
+                headers: {"X-CSRFToken": cookies["csrftoken"]},
+                success:
+                    function (data) {
+                        location.reload();
+                    }
+            });
+        }
+    }
+
+
+</script>
+
 </body>
 
 </html>

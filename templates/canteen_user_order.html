@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<body>
+<nav class="navbar navbar-light navbar-expand-md navigation-clean">
+    <div class="container"><a class="navbar-brand" href="/">UniManager</a>
+        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse"
+             id="navcol-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome {{ name }}</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="bootstrap_cards2">
+            <div class="container py-5">
+
+                <!-- First Row [Products]-->
+                <h1 class="font-weight-bold mb-2">Place your Orders</h1>
+
+                <div class="row pb-5 mb-4">
+                    {% for menu_item in menu_items %}
+                        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                            <!-- Card-->
+                            <div class="card rounded shadow-sm border-0" style="position: relative">
+                                <div class="card-body p-4"><img src="/media/{{ menu_item.photo }}" alt=""
+                                                                class="img-fluid d-block mx-auto mb-3">
+                                    <h5>{{ menu_item.name }}</h5>
+                                    <h6><span class="text-dark">₹ {{ menu_item.price }}</span></h6>
+                                    <br/>
+                                    <div class="_3dY_ZR" style="position: absolute;bottom:20px;">
+                                        <button type="button" class="_23FHuj"
+                                                onclick="decrement({{ menu_item.id }}, {{ menu_item.price }})"> –
+                                        </button>
+                                        <div class="_26HdzL">
+                                            <input type="text" value="0" id="{{ menu_item.id }}"
+                                                   name="{{ menu_item.id }}"
+                                                   class="_253qQJ">
+                                        </div>
+                                        <button type="button" class="_23FHuj"
+                                                onclick="increment({{ menu_item.id }}, {{ menu_item.price }})"> +
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div style="padding-bottom: 20px;position: sticky;bottom: 0;padding-bottom: 10vh;background-color: #ffffff;">
+
+            <label
+                    class="d-inline-flex float-left d-sm-flex justify-content-sm-start" for="total_price"
+                    style="padding-left: 20px;margin-top: 20px;font-weight: bold;">Total Price:</label>
+            <label
+                    class="d-inline-flex float-left d-sm-flex justify-content-sm-start" for="total_price"
+                    style="margin-left: 10px;margin-top: 20px;"> ₹</label>
+            <label
+                    class="d-inline-flex float-left d-sm-flex justify-content-sm-start" for="total_price"
+                    style="margin-left: 10px;margin-top: 20px;" id="total_price">0.00</label>
+
+            <input type="datetime-local" id="delivery_date" style="margin-top: 18px; margin-left: 15px"
+                   name="delivery_date">
+
+            <button type="submit" class="btn btn-primary text-uppercase text-white float-right" role="button"
+                    style="margin-right: 20px;margin-top: 20px;">Place Order
+            </button>
+        </div>
+    </form>
+
+</div>
+<div class="footer-basic">
+    <footer>
+        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+                class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a
+                href="#"><i class="icon ion-social-facebook"></i></a></div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">Company Name © 2017</p>
+    </footer>
+</div>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/Table-With-Search.js' %}"></script>
+
+<script>
+
+
+    function increment(id, price) {
+        var total = parseFloat($("#total_price").html())
+        total = total + price;
+        $("#total_price").html(total);
+        $("#" + id).val(parseInt($("#" + id).val()) + 1);
+
+    }
+
+    function decrement(id, price) {
+        if ((parseInt($("#" + id).val())) > 0) {
+            var total = parseFloat($("#total_price").html())
+            total = total - price;
+            $("#total_price").html(total);
+            $("#" + id).val(parseInt($("#" + id).val()) - 1);
+        }
+    }
+
+
+    $(document).ready(function () {
+        var today = new Date();
+        today.setHours(today.getHours() + (today.getTimezoneOffset() / -60));
+        today.setMinutes(today.getMinutes() + 30);
+        today.setSeconds(0);
+        $("#delivery_date").val(today.toJSON().slice(0, 19));
+    });
+
+
+</script>
+
+
+</body>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Hackathon</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Bootstrap-Cards-v2-shri.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Contact-Form-Clean-shri.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Footer-Basic-shri.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Clean-1-shri.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Clean-shri.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Navigation-Clean-shri.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/styles-shri.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search-1-shri.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search-shri.css' %}">
+</head>
+
+</html>

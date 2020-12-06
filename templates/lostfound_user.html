@@ -27,8 +27,8 @@
                 id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome Test</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Logout</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Welcome {{ name }}</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="d-block d-xl-flex justify-content-xl-center align-items-xl-center">
                 <h2 class="text-center justify-content-xl-center align-items-xl-center" style="width: 228px;font-size: 25px;">Lost &amp; Found Item</h2>
             </div>
-            <div class="form-group" style="margin-top: 15px;"><a class="btn btn-secondary btn-sm text-uppercase text-center d-block" role="button" href="reportItem_lostfound.html" style="background-color: rgb(88,16,145);margin-top: 0;height: 29px;line-height: 16px;">Report a lost item</a></div>
+            <div class="form-group" style="margin-top: 15px; "><button class="btn btn-secondary btn-sm text-uppercase text-center d-block" type="button"  onclick="window.location = 'lost-and-found/report'" style="background-color: rgb(88,16,145);margin-top: 0;height: 29px;line-height: 16px;width: 100%">Report a lost item</button></div>
             <div class="table-responsive"
                 style="margin-top: 9px;">
                 <table class="table">
@@ -49,10 +49,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Cell 1</td>
-                            <td>Cell 2</td>
+
+                    {% for lf in lost_and_found  %}
+                    <tr>
+                            <td>{{ lf.name}}</td>
+                            <td>{{ lf.submit_date}}</td>
                         </tr>
+                    {% endfor %}
+
                     </tbody>
                 </table>
             </div>
