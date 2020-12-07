@@ -104,7 +104,7 @@ def canteen_admin_statistics(request):
         orders = Order.objects.filter(delivery_date__date=date)
         for order in orders:
             days_total += order.total_cost
-        arr.append([i, days_total])
+        arr.append([date.strftime('%d/%m/%Y'), days_total])
         date = date+timedelta(days=1)
 
 

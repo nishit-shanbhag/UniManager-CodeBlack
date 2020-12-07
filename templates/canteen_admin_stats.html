@@ -108,6 +108,7 @@
 
         var arr = "{{ data_30 }}"
         arr = arr.replaceAll("&#x27;", "\"")
+
         arr = JSON.parse(arr);
         var data = google.visualization.arrayToDataTable(arr);
 
