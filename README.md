@@ -11,10 +11,10 @@ event notifications.
 [Amar Gurav](https://github.com/amargurav1495/)<br>
 [Shristi Bisht](https://github.com/ShristiBisht/)
 
-## WHY?
+## Why?
 To provide bettter platform for students to use different services present in university premises. It also provides staff a way to store the data and use it to improve their services. 
 
-## HOW?
+## How?
 An User Friendly Web application for using different services which are present in university premises like canteen, lost and found, complaint box. 
 It also notifies students about ongoing and upcoming events in college.
 
