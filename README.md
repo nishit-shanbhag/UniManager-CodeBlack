@@ -34,12 +34,12 @@ It also notifies students about ongoing and upcoming events in college.
 # ![1](static/assets/img/1.png)
 2. Using Services(Users)
   * Lost and Found - view all reported items and report lost items.
-  # ![2](static/assets/img/md/2.png)
-  # ![3](static/assets/img/md/3.png)
+  # ![2](static/assets/img/2.png)
+  # ![3](static/assets/img/3.png)
   * Complaints / Requests - register a complaint / request 
-  # ![4](static/assets/img/md/4.png)
+  # ![4](static/assets/img/4.png)
   * Canteen - view your orders and order food with takeaway date and time.
-  # ![5](static/assets/img/md/5.png)
+  # ![5](static/assets/img/5.png)
   # ![6](static/assets/img/6.png)
   * Events - view upcoming events
   # ![7](static/assets/img/7.png)
