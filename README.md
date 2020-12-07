@@ -1,14 +1,5 @@
 # ![logo](logo.png)
 
-06-Dec-2020
-
-
-
-Be Smart,
-Be Ready,
-Be Noticed.
-
-## UniManager: :star:
 All in one app where we can access smart
 university services like complaints related to university, lost & found, canteen orders,
 event notifications.
