@@ -28,3 +28,32 @@ It also notifies students about ongoing and upcoming events in college.
 * Django
 * JavaScript
 * SQLite
+
+## How to use this application
+1. Login/Register on the portal, you will be redirected to the home pages where you will be able to view all the services.
+# ![1](static/assets/img/1.png)
+2. Using Services(Users)
+  * Lost and Found - view all reported items and report lost items.
+  # ![2](static/assets/img/2.png)
+  # ![3](static/assets/img/3.png)
+  * Complaints / Requests - register a complaint / request 
+  # ![4](static/assets/img/4.png)
+  * Canteen - view your orders and order food with takeaway date and time.
+  # ![5](static/assets/img/5.png)
+  # ![6](static/assets/img/6.png)
+  * Events - view upcoming events
+  # ![7](static/assets/img/7.png)
+ 3. Providing / Monitoring Services(Admin)
+  * Lost and Found - view all reported items and change status and description.
+  # ![8](static/assets/img/8.png)
+  # ![9](static/assets/img/9.png)
+  * Complaints / Requests - View all requests and change the status.
+  # ![10](static/assets/img/10.png)
+  * Canteen - view all pending orders and change status, view sales and popularity reports.
+  # ![11](static/assets/img/11.png)
+  # ![12](static/assets/img/12.jpeg)
+  # ![13](static/assets/img/13.jpeg)
+  * Events - Create and view upcoming events.
+  # ![14](static/assets/img/14.png)
+  
+  
