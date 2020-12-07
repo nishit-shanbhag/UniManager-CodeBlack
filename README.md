@@ -45,8 +45,8 @@ It also notifies students about ongoing and upcoming events in college.
   # ![7](static/assets/img/7.png)
  3. Providing / Monitoring Services(Admin)
   * Lost and Found - view all reported items and change status and description.
-  # ![8](static/asset/img/8.png)
-  # ![9](static/asset/img/9.png)
+  # ![8](static/assets/img/8.png)
+  # ![9](static/assets/img/9.png)
   * Complaints / Requests - View all requests and change the status.
   # ![10](static/assets/img/10.png)
   * Canteen - view all pending orders and change status, view sales and popularity reports.
