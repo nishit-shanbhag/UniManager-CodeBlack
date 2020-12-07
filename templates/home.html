@@ -48,7 +48,8 @@
             </div>
             <div class="form-group d-flex">
                 <button class="btn btn-primary btn-block d-xl-flex justify-content-xl-center" type="button"
-                        style="margin-right: 7vw;margin-left: 7vw;" onclick="window.location='/home/complaints'">Complaints
+                        style="margin-right: 7vw;margin-left: 7vw;" onclick="window.location='/home/complaints'">
+                    Complaints
                 </button>
             </div>
             <div class="form-group d-flex">
@@ -86,6 +87,20 @@
                 <button class="btn btn-primary btn-block d-xl-flex justify-content-xl-center" type="button"
                         style="margin-right: 7vw;margin-left: 7vw;background-color: rgb(88,16,145);color: rgb(255,255,255);"
                         onclick="window.location='/home/canteen-admin'">Canteen
+                </button>
+            </div>
+            <div class="form-group d-flex">
+                <button class="btn btn-primary btn-block d-xl-flex justify-content-xl-center" type="button"
+                        style="margin-right: 7vw;margin-left: 7vw;background-color: rgb(88,16,145);color: rgb(255,255,255);"
+                        onclick="window.location='/home/canteen-admin-stats'">Statistics
+                </button>
+            </div>
+        {% elif user_type == 4 %}
+            <h2 class="text-center">Event Admin</h2>
+            <div class="form-group d-flex">
+                <button class="btn btn-primary btn-block d-xl-flex justify-content-xl-center" type="button"
+                        style="margin-right: 7vw;margin-left: 7vw;background-color: rgb(88,16,145);color: rgb(255,255,255);"
+                        onclick="window.location='/home/events-admin'">Add Event
                 </button>
             </div>
 
