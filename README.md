@@ -11,6 +11,9 @@ event notifications.
 [Amar Gurav](https://github.com/amargurav1495/)<br>
 [Shristi Bisht](https://github.com/ShristiBisht/)
 
+## Presentation Deck
+[Click to view](https://docs.google.com/presentation/d/1yGGbcHS-yJyDMK28Nxf6tl-xfpYmEcnfNKTIRJOxMW4/edit?usp=sharing)<br>
+
 ## Why?
 To provide bettter platform for students to use different services present in university premises. It also provides staff a way to store the data and use it to improve their services. 
 
