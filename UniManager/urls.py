@@ -31,13 +31,16 @@ urlpatterns = [
     path("home/lost-and-found/report", lost_and_found_report, name="lost_and_found_report"),
     path("home/complaints", complaints_user, name="complaints"),
     path("home/canteen", canteen_user, name="canteen"),
-    # path("home/lost-and-found-admin", home, name="lost-and-found-admin"),
+    path("home/canteen/new", canteen_user_order, name="canteen"),
+    path("home/lost-and-found-admin", lost_and_found_admin, name="lost-and-found-admin"),
+    path("home/lost-and-found-admin/<int:id>", lost_and_found_admin_info, name="lost-and-found-admin-info"),
     path("home/complaints-admin", complaints_admin, name="complaints-admin"),
     path("home/canteen-admin", canteen_admin, name="canteen-admin"),
     path("home/canteen-admin-stats", canteen_admin_statistics, name="canteen-admin-stats"),
     path("canteen_admin_status_change", canteen_admin_status_change, name="canteen_admin_status_change"),
     path("complaint_admin_status_change", complaint_admin_status_change, name="complaint_admin_status_change"),
-
+    path("home/events", event_user, name="event_user"),
+    path("home/events-admin", event_admin, name="event_admin"),
     # path("temp/", get_lost_and_found_complains, name="temp"),
     # path("temp/<int:id>", get_lost_and_found_by_id, name="temp")
 ]
